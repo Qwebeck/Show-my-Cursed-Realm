@@ -1,0 +1,96 @@
+package room
+public
+	
+	device camera
+		features
+			video: out data port;
+	end camera;
+	
+	device movement_sensor
+		features
+			movement_detected: out event port;
+	end movement_sensor;
+	
+	
+	device open_sensor
+		features
+			object_opened: out event port;
+	end open_sensor;
+	
+		
+	process room_controller
+		-- to jest jakiś software który steruje całym naszym systemem.
+		-- ten software dostaje jakieś dane (in event/data port) i na podstawie 
+		-- tych danych decyduje o tym, czy w pokoju jest jakaś osoba.
+		-- W jaki sposób on to robi, my nie mamy żadnego pojęcia, ponieważ to nie jest zadanie AADL.
+		-- Wiemy tylko to, że on to robi i wiemy jakie dane on do tego potrzbuje.
+		features			
+			person_in: out event port;
+			door_opened: in event port;
+			window_opened: in event port;
+			movement_detected: in event port;
+			video: in data port;
+	end room_controller;
+	
+	
+	
+	system room
+		-- interfejs który opisuje to jak działa system monitoringu w naszym pokóju.  
+		features
+			person_in: out event port;
+	end room;
+	
+	system implementation room.standard_room
+		subcomponents -- tutaj definiujemy to jakie urządzenia znajdują się w naszym pokoju. 
+		-- Nie definiujemy tego w interfejsie ponieważ nie są to dane które powinny być widoczne na zewnątrz.
+			camera: device camera;
+			movement_sensor: device movement_sensor;
+			open_window_sensor: device open_sensor;
+			open_door_sensor: device open_sensor;
+			controller: process room_controller;
+		connections
+			-- tutaj pokazujemy to w jaki sposób nasze urządzenia są połączone ze sobą i jak między nimi przepływają dane
+			C1: port camera.video -> controller.video; 
+			C2: port movement_sensor.movement_detected -> controller.movement_detected;
+			C3: port open_window_sensor.object_opened -> controller.window_opened;
+			C4: port open_door_sensor.object_opened -> controller.door_opened;
+			C5: port controller.person_in -> person_in; -- przekierowujemy output z controllera na zewnętrzny port naszego systemu
+	end room.standard_room;
+	
+	
+	-- Część z monitorowanym obiektem
+	
+	device alarm
+		features
+			turn_on_alarm: in event port;
+	end alarm;
+	
+	system monitored_object
+		
+	end monitored_object;
+	
+	process monitored_object_controller
+		features
+			person_in: in event port;
+			turn_on_alarm: out event port;
+	end monitored_object_controller;
+	
+	
+	
+	system implementation monitored_object.target_obj
+		-- przykład monitorowanego systemu, który składa się z trzech pokoi, sterownika oraz alarma.
+		-- system działa w taki sposób, że przekazuje dane do sterownika w przypadku jeśli do któregoś z pokoi wejdzie osoba.
+		subcomponents
+			room_1: system room.standard_room;
+			room_2: system room.standard_room;
+			room_3: system room.standard_room;
+			controller: process monitored_object_controller;
+			alarm: device alarm;
+		connections
+			C1: port room_1.person_in -> controller.person_in;
+			C2: port room_2.person_in -> controller.person_in;
+			C3: port room_3.person_in -> controller.person_in;
+			C4: port controller.turn_on_alarm -> alarm.turn_on_alarm;
+	end monitored_object.target_obj;
+	
+end room;
