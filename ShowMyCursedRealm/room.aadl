@@ -4,6 +4,7 @@ public
 	device camera
 		features
 			video: out data port;
+			camera_on: in event port;
 	end camera;
 	
 	device movement_sensor
@@ -11,6 +12,10 @@ public
 			movement_detected: out event port;
 	end movement_sensor;
 	
+	device pin_lock
+		features
+			entered_pin: out data port;
+	end pin_lock;	
 	
 	device open_sensor
 		features
@@ -30,6 +35,8 @@ public
 			window_opened: in event port;
 			movement_detected: in event port;
 			video: in data port;
+			camera_on: out event port;
+			entered_pin: in data port;
 	end room_controller;
 	
 	
@@ -48,9 +55,12 @@ public
 			open_window_sensor: device open_sensor;
 			open_door_sensor: device open_sensor;
 			controller: process room_controller;
+			pin_device: device pin_lock;
 		connections
 			-- tutaj pokazujemy to w jaki sposób nasze urządzenia są połączone ze sobą i jak między nimi przepływają dane
 			C1: port camera.video -> controller.video; 
+			C6: port controller.camera_on -> camera.camera_on; 
+			C7: port pin_device.entered_pin -> controller.entered_pin;
 			C2: port movement_sensor.movement_detected -> controller.movement_detected;
 			C3: port open_window_sensor.object_opened -> controller.window_opened;
 			C4: port open_door_sensor.object_opened -> controller.door_opened;
