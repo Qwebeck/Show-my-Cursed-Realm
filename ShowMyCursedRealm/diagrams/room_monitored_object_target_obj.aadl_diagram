@@ -13,11 +13,8 @@
         <seg>C1</seg>
       </bo>
       <bendpoints>
-        <point x="1365.0" y="360.0"/>
-        <point x="1364.0" y="252.0"/>
-        <point x="812.0" y="252.0"/>
-        <point x="281.0" y="252.0"/>
-        <point x="281.0" y="172.0"/>
+        <point x="1020.0" y="496.0"/>
+        <point x="1020.0" y="172.0"/>
       </bendpoints>
     </element>
     <element uuid="c33f509c-3fae-4b63-a3bb-f0aba9119149" manual="true">
@@ -32,8 +29,8 @@
         <seg>C2</seg>
       </bo>
       <bendpoints>
-        <point x="281.0" y="92.0"/>
-        <point x="281.0" y="172.0"/>
+        <point x="1020.0" y="92.0"/>
+        <point x="1020.0" y="172.0"/>
       </bendpoints>
     </element>
     <element uuid="639a9b94-9536-4938-922e-abe57e08d730" manual="true">
@@ -72,7 +69,7 @@
         <seg>subcomponent</seg>
         <seg>alarm</seg>
       </bo>
-      <position x="1138.0" y="118.0"/>
+      <position x="1366.0" y="118.0"/>
       <size width="298.0" height="60.0"/>
     </element>
     <element uuid="474aa977-8156-4097-8c5a-8c6328c136ad" manual="true">
@@ -94,7 +91,7 @@
         <seg>subcomponent</seg>
         <seg>controller</seg>
       </bo>
-      <position x="668.0" y="118.0"/>
+      <position x="1018.0" y="118.0"/>
       <size width="328.0" height="60.0"/>
     </element>
     <element uuid="59a093ee-7416-4d7a-aa6f-b9125b17ee0a" manual="true">
@@ -121,6 +118,10 @@
           <seg>connection</seg>
           <seg>C2</seg>
         </bo>
+        <bendpoints>
+          <point x="504.0" y="681.0"/>
+          <point x="504.0" y="621.0"/>
+        </bendpoints>
       </element>
       <element uuid="f9a5a23c-79d9-46b2-94b5-c0dbad10371d" manual="true">
         <element uuid="0b7e7378-7606-4dfc-bc4f-19a8f4e3d717" manual="true">
@@ -133,6 +134,10 @@
           <seg>connection</seg>
           <seg>C3</seg>
         </bo>
+        <bendpoints>
+          <point x="504.0" y="601.0"/>
+          <point x="504.0" y="571.0"/>
+        </bendpoints>
       </element>
       <element uuid="9b5b55db-aee5-41c5-9c61-c7f876daf111" manual="true">
         <element uuid="882558fc-bb3c-40bd-bb99-1d6d2c370a54" manual="true">
@@ -145,6 +150,10 @@
           <seg>connection</seg>
           <seg>C4</seg>
         </bo>
+        <bendpoints>
+          <point x="504.0" y="311.0"/>
+          <point x="504.0" y="371.0"/>
+        </bendpoints>
       </element>
       <element uuid="9ac7737b-270c-4948-84ab-86660c8e78ae" manual="true">
         <element uuid="2fd914bf-b175-4052-ac4e-f6c1cb3cdd48" manual="true">
@@ -158,70 +167,119 @@
           <seg>C5</seg>
         </bo>
       </element>
+      <element uuid="7c0512c4-eb8d-4f69-a209-a8debc2aeda5" manual="true">
+        <element uuid="71e0b28a-94df-4fb9-9383-9f457a42942d" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>C6</seg>
+        </bo>
+      </element>
+      <element uuid="a879d9db-c953-46ce-b24b-54c0721597c1" manual="true">
+        <element uuid="60166bf9-7f2d-4ff2-b559-871b38256298" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>C7</seg>
+        </bo>
+        <bendpoints>
+          <point x="504.0" y="391.0"/>
+          <point x="504.0" y="421.0"/>
+        </bendpoints>
+      </element>
       <element uuid="f89bc776-8366-476d-90d1-3b7d9497a4eb" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>person_in</seg>
         </bo>
-        <position x="1217.0" y="10.0"/>
+        <position x="912.0" y="254.0"/>
       </element>
       <element uuid="b723ada7-ef63-4caa-9847-bdba3f82a142" manual="true">
+        <element uuid="6c53472d-f256-42b2-9fba-372e76247ffc" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>camera_on</seg>
+          </bo>
+          <position x="177.0" y="10.0"/>
+        </element>
         <element uuid="885a411e-d609-4e30-a6dc-a7a1959f4093" manual="true" dockArea="right">
           <bo>
             <seg>feature</seg>
             <seg>video</seg>
           </bo>
-          <position x="139.0"/>
+          <position x="215.0" y="60.0"/>
         </element>
         <bo>
           <seg>subcomponent</seg>
           <seg>camera</seg>
         </bo>
-        <position x="93.0" y="190.0"/>
-        <size width="181.0" height="60.0"/>
+        <position x="213.0" y="219.0"/>
+        <size width="257.0" height="110.0"/>
       </element>
       <element uuid="c91c196f-3696-4fef-994e-50a1d1fc4e20" manual="true">
+        <element uuid="2ce998c1-a5f4-4cf8-9931-f88e9f9a7317" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>camera_on</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
         <element uuid="efa89f99-850a-4767-ad4c-50d52eec7d7b" manual="true" dockArea="left">
           <bo>
             <seg>feature</seg>
             <seg>door_opened</seg>
           </bo>
-          <position y="210.0"/>
+          <position y="10.0"/>
+        </element>
+        <element uuid="4673ac80-99fd-44c1-aed4-2e6a107add58" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>entered_pin</seg>
+          </bo>
+          <position y="60.0"/>
         </element>
         <element uuid="392922dc-aa39-4bab-9d4d-b658f427bbad" manual="true" dockArea="left">
           <bo>
             <seg>feature</seg>
             <seg>movement_detected</seg>
           </bo>
-          <position y="60.0"/>
+          <position y="260.0"/>
         </element>
         <element uuid="0f96d354-45c0-4860-81aa-1ed1abe3da41" manual="true" dockArea="right">
           <bo>
             <seg>feature</seg>
             <seg>person_in</seg>
           </bo>
-          <position x="251.0" y="10.0"/>
+          <position x="326.0" y="135.0"/>
         </element>
         <element uuid="f4232ec5-7db6-4ca9-bf31-bb2042cd9516" manual="true" dockArea="left">
           <bo>
             <seg>feature</seg>
             <seg>video</seg>
           </bo>
-          <position y="10.0"/>
+          <position y="160.0"/>
         </element>
         <element uuid="f9b8ee53-758b-4a9a-b461-f5bb76db8d58" manual="true" dockArea="left">
           <bo>
             <seg>feature</seg>
             <seg>window_opened</seg>
           </bo>
-          <position y="110.0"/>
+          <position y="210.0"/>
         </element>
         <bo>
           <seg>subcomponent</seg>
           <seg>controller</seg>
         </bo>
-        <position x="893.0" y="200.0"/>
-        <size width="325.0" height="250.0"/>
+        <position x="490.0" y="119.0"/>
+        <size width="400.0" height="310.0"/>
       </element>
       <element uuid="3f6e1caa-b50b-47f5-ae87-42edc77a9422" manual="true">
         <element uuid="7e2f85c0-1008-46a0-9617-70b7666808ec" manual="true" dockArea="right">
@@ -229,13 +287,13 @@
             <seg>feature</seg>
             <seg>movement_detected</seg>
           </bo>
-          <position x="316.0" y="11.0"/>
+          <position x="316.0" y="10.0"/>
         </element>
         <bo>
           <seg>subcomponent</seg>
           <seg>movement_sensor</seg>
         </bo>
-        <position x="93.0" y="280.0"/>
+        <position x="12.0" y="429.0"/>
         <size width="458.0" height="60.0"/>
       </element>
       <element uuid="ebfac556-238b-4829-b42c-1ffb2d53c3cd" manual="true">
@@ -250,7 +308,7 @@
           <seg>subcomponent</seg>
           <seg>open_door_sensor</seg>
         </bo>
-        <position x="110.0" y="460.0"/>
+        <position x="80.0" y="59.0"/>
         <size width="390.0" height="60.0"/>
       </element>
       <element uuid="20faaa77-27f6-4a56-9153-316b1cd96664" manual="true">
@@ -259,14 +317,29 @@
             <seg>feature</seg>
             <seg>object_opened</seg>
           </bo>
-          <position x="254.0" y="10.0"/>
+          <position x="302.0" y="10.0"/>
         </element>
         <bo>
           <seg>subcomponent</seg>
           <seg>open_window_sensor</seg>
         </bo>
-        <position x="100.0" y="370.0"/>
-        <size width="361.0" height="50.0"/>
+        <position x="61.0" y="349.0"/>
+        <size width="409.0" height="60.0"/>
+      </element>
+      <element uuid="fe1f1e93-e94a-419f-a236-036bf2d5eefe" manual="true">
+        <element uuid="afa4afcf-1d28-4b58-8c94-f2448aaa561c" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>entered_pin</seg>
+          </bo>
+          <position x="210.0" y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>pin_device</seg>
+        </bo>
+        <position x="173.0" y="139.0"/>
+        <size width="297.0" height="60.0"/>
       </element>
       <element uuid="61d4f525-2c78-4f55-a63b-0db196cd1df6" manual="true">
         <bo>
@@ -278,8 +351,8 @@
         <seg>subcomponent</seg>
         <seg>room_1</seg>
       </bo>
-      <position x="18.0" y="308.0"/>
-      <size width="1291.0" height="611.0"/>
+      <position x="12.0" y="198.0"/>
+      <size width="986.0" height="501.0"/>
     </element>
     <element uuid="f258c686-6331-4d96-b8c9-b7a2e507409a" manual="true">
       <element uuid="54907bf3-4ce4-45ad-8cf7-87b236722464" manual="true" dockArea="right">
@@ -293,7 +366,7 @@
         <seg>subcomponent</seg>
         <seg>room_2</seg>
       </bo>
-      <position x="12.0" y="38.0"/>
+      <position x="751.0" y="38.0"/>
       <size width="247.0" height="60.0"/>
     </element>
     <element uuid="091f89bc-1a4b-4405-8ad4-a9627556144b" manual="true">
@@ -308,7 +381,7 @@
         <seg>subcomponent</seg>
         <seg>room_3</seg>
       </bo>
-      <position x="12.0" y="118.0"/>
+      <position x="751.0" y="118.0"/>
       <size width="247.0" height="60.0"/>
     </element>
     <bo>
@@ -316,7 +389,7 @@
       <seg>monitored_object.target_obj</seg>
     </bo>
     <position x="12.0" y="12.0"/>
-    <size width="1449.0" height="948.0"/>
+    <size width="1676.0" height="711.0"/>
   </element>
   <config type="structure" connectionPrimaryLabelsVisible="false">
     <enabledAadlProperties/>
