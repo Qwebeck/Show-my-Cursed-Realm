@@ -1,20 +1,6 @@
 <cheddar>
   <core_units>
-    <core_unit id="5">
-      <object_type>Core_Object_Type</object_type>
-      <name>core_monitored_object_target_obj_Instance.cpu</name>
-      <scheduling>
-        <scheduler_type>Posix_1003_Highest_Priority_First_Protocol</scheduler_type>
-        <quantum>0</quantum>
-        <preemptive_type>Preemptive</preemptive_type>
-        <capacity>0</capacity>
-        <period>0</period>
-        <priority>0</priority>
-        <start_time>0</start_time>
-      </scheduling>
-      <speed>1</speed>
-    </core_unit>
-    <core_unit id="7">
+    <core_unit id="4">
       <object_type>Core_Object_Type</object_type>
       <name>core_monitored_object_target_obj_Instance.room_1.cpu</name>
       <scheduling>
@@ -28,7 +14,7 @@
       </scheduling>
       <speed>1</speed>
     </core_unit>
-    <core_unit id="9">
+    <core_unit id="6">
       <object_type>Core_Object_Type</object_type>
       <name>core_monitored_object_target_obj_Instance.room_2.cpu</name>
       <scheduling>
@@ -42,7 +28,7 @@
       </scheduling>
       <speed>1</speed>
     </core_unit>
-    <core_unit id="11">
+    <core_unit id="8">
       <object_type>Core_Object_Type</object_type>
       <name>core_monitored_object_target_obj_Instance.room_3.cpu</name>
       <scheduling>
@@ -60,7 +46,7 @@
   <memories>
     <generic_memory id="1">
       <object_type>Task_Object_Type</object_type>
-      <name>monitored_object_target_obj_Instance.RAM</name>
+      <name>monitored_object_target_obj_Instance.room_1.cpu.ram</name>
       <shared_access_latency>0</shared_access_latency>
       <private_access_latency>0</private_access_latency>
       <l_rw_inter>0</l_rw_inter>
@@ -72,7 +58,7 @@
     </generic_memory>
     <generic_memory id="2">
       <object_type>Task_Object_Type</object_type>
-      <name>monitored_object_target_obj_Instance.room_1.RAM</name>
+      <name>monitored_object_target_obj_Instance.room_2.cpu.ram</name>
       <shared_access_latency>0</shared_access_latency>
       <private_access_latency>0</private_access_latency>
       <l_rw_inter>0</l_rw_inter>
@@ -84,19 +70,7 @@
     </generic_memory>
     <generic_memory id="3">
       <object_type>Task_Object_Type</object_type>
-      <name>monitored_object_target_obj_Instance.room_2.RAM</name>
-      <shared_access_latency>0</shared_access_latency>
-      <private_access_latency>0</private_access_latency>
-      <l_rw_inter>0</l_rw_inter>
-      <l_act_inter>0</l_act_inter>
-      <l_pre_inter>0</l_pre_inter>
-      <n_reorder>0</n_reorder>
-      <l_conhit>0</l_conhit>
-      <l_conf>0</l_conf>
-    </generic_memory>
-    <generic_memory id="4">
-      <object_type>Task_Object_Type</object_type>
-      <name>monitored_object_target_obj_Instance.room_3.RAM</name>
+      <name>monitored_object_target_obj_Instance.room_3.cpu.ram</name>
       <shared_access_latency>0</shared_access_latency>
       <private_access_latency>0</private_access_latency>
       <l_rw_inter>0</l_rw_inter>
@@ -108,40 +82,33 @@
     </generic_memory>
   </memories>
   <processors>
-    <mono_core_processor id="6">
-      <object_type>Processor_Object_Type</object_type>
-      <name>monitored_object_target_obj_Instance.cpu</name>
-      <processor_type>Monocore_type</processor_type>
-      <migration_type>No_Migration_Type</migration_type>
-      <core ref="5"/>
-    </mono_core_processor>
-    <mono_core_processor id="8">
+    <mono_core_processor id="5">
       <object_type>Processor_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_1.cpu</name>
       <processor_type>Monocore_type</processor_type>
       <migration_type>No_Migration_Type</migration_type>
-      <core ref="7"/>
+      <core ref="4"/>
     </mono_core_processor>
-    <mono_core_processor id="10">
+    <mono_core_processor id="7">
       <object_type>Processor_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_2.cpu</name>
       <processor_type>Monocore_type</processor_type>
       <migration_type>No_Migration_Type</migration_type>
-      <core ref="9"/>
+      <core ref="6"/>
     </mono_core_processor>
-    <mono_core_processor id="12">
+    <mono_core_processor id="9">
       <object_type>Processor_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_3.cpu</name>
       <processor_type>Monocore_type</processor_type>
       <migration_type>No_Migration_Type</migration_type>
-      <core ref="11"/>
+      <core ref="8"/>
     </mono_core_processor>
   </processors>
   <address_spaces>
-    <address_space id="13">
+    <address_space id="10">
       <object_type>Address_Space_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.controller</name>
-      <cpu_name>monitored_object_target_obj_Instance.cpu</cpu_name>
+      <cpu_name>aadl_component_is_not_bound</cpu_name>
       <text_memory_size>0</text_memory_size>
       <stack_memory_size>0</stack_memory_size>
       <data_memory_size>0</data_memory_size>
@@ -161,7 +128,7 @@
       <mils_partition>Device</mils_partition>
       <mils_compliant>false</mils_compliant>
     </address_space>
-    <address_space id="14">
+    <address_space id="11">
       <object_type>Address_Space_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_1.controller</name>
       <cpu_name>monitored_object_target_obj_Instance.room_1.cpu</cpu_name>
@@ -184,7 +151,7 @@
       <mils_partition>Device</mils_partition>
       <mils_compliant>false</mils_compliant>
     </address_space>
-    <address_space id="15">
+    <address_space id="12">
       <object_type>Address_Space_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_2.controller</name>
       <cpu_name>monitored_object_target_obj_Instance.room_2.cpu</cpu_name>
@@ -207,7 +174,7 @@
       <mils_partition>Device</mils_partition>
       <mils_compliant>false</mils_compliant>
     </address_space>
-    <address_space id="16">
+    <address_space id="13">
       <object_type>Address_Space_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_3.controller</name>
       <cpu_name>monitored_object_target_obj_Instance.room_3.cpu</cpu_name>
@@ -232,10 +199,10 @@
     </address_space>
   </address_spaces>
   <tasks>
-    <sporadic_task id="17">
+    <periodic_task id="14">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_1.controller.the_video_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_1.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_1.controller</address_space_name>
       <capacity>3</capacity>
@@ -258,16 +225,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="18">
+    </periodic_task>
+    <periodic_task id="15">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_1.controller.the_door_sensor_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_1.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_1.controller</address_space_name>
       <capacity>3</capacity>
@@ -290,16 +255,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="19">
+    </periodic_task>
+    <periodic_task id="16">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_1.controller.the_window_sensor_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_1.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_1.controller</address_space_name>
       <capacity>3</capacity>
@@ -322,16 +285,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="20">
+    </periodic_task>
+    <periodic_task id="17">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_1.controller.the_pin_device_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_1.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_1.controller</address_space_name>
       <capacity>3</capacity>
@@ -354,16 +315,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="21">
+    </periodic_task>
+    <periodic_task id="18">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_1.controller.the_movement_sensor_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_1.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_1.controller</address_space_name>
       <capacity>3</capacity>
@@ -386,16 +345,44 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="22">
+    </periodic_task>
+    <periodic_task id="19">
+      <object_type>Task_Object_Type</object_type>
+      <name>monitored_object_target_obj_Instance.room_1.controller.the_access_control_thread</name>
+      <task_type>Periodic_Type</task_type>
+      <cpu_name>monitored_object_target_obj_Instance.room_1.cpu</cpu_name>
+      <address_space_name>monitored_object_target_obj_Instance.room_1.controller</address_space_name>
+      <capacity>3</capacity>
+      <deadline>1000</deadline>
+      <start_time>0</start_time>
+      <priority>10</priority>
+      <blocking_time>0</blocking_time>
+      <policy>Sched_Fifo</policy>
+      <offsets/>
+      <text_memory_size>0</text_memory_size>
+      <text_memory_start_address>0</text_memory_start_address>
+      <stack_memory_size>0</stack_memory_size>
+      <criticality>0</criticality>
+      <context_switch_overhead>0</context_switch_overhead>
+      <cfg_relocatable>false</cfg_relocatable>
+      <mils_confidentiality_level>UnClassified</mils_confidentiality_level>
+      <mils_integrity_level>Low</mils_integrity_level>
+      <mils_component>SLS</mils_component>
+      <mils_task>Application</mils_task>
+      <mils_compliant>false</mils_compliant>
+      <access_memory_number>0</access_memory_number>
+      <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
+      <period>30</period>
+      <jitter>0</jitter>
+      <every>0</every>
+    </periodic_task>
+    <periodic_task id="20">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_2.controller.the_video_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_2.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_2.controller</address_space_name>
       <capacity>3</capacity>
@@ -418,16 +405,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="23">
+    </periodic_task>
+    <periodic_task id="21">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_2.controller.the_door_sensor_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_2.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_2.controller</address_space_name>
       <capacity>3</capacity>
@@ -450,16 +435,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="24">
+    </periodic_task>
+    <periodic_task id="22">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_2.controller.the_window_sensor_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_2.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_2.controller</address_space_name>
       <capacity>3</capacity>
@@ -482,16 +465,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="25">
+    </periodic_task>
+    <periodic_task id="23">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_2.controller.the_pin_device_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_2.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_2.controller</address_space_name>
       <capacity>3</capacity>
@@ -514,16 +495,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="26">
+    </periodic_task>
+    <periodic_task id="24">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_2.controller.the_movement_sensor_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_2.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_2.controller</address_space_name>
       <capacity>3</capacity>
@@ -546,16 +525,44 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="27">
+    </periodic_task>
+    <periodic_task id="25">
+      <object_type>Task_Object_Type</object_type>
+      <name>monitored_object_target_obj_Instance.room_2.controller.the_access_control_thread</name>
+      <task_type>Periodic_Type</task_type>
+      <cpu_name>monitored_object_target_obj_Instance.room_2.cpu</cpu_name>
+      <address_space_name>monitored_object_target_obj_Instance.room_2.controller</address_space_name>
+      <capacity>3</capacity>
+      <deadline>1000</deadline>
+      <start_time>0</start_time>
+      <priority>10</priority>
+      <blocking_time>0</blocking_time>
+      <policy>Sched_Fifo</policy>
+      <offsets/>
+      <text_memory_size>0</text_memory_size>
+      <text_memory_start_address>0</text_memory_start_address>
+      <stack_memory_size>0</stack_memory_size>
+      <criticality>0</criticality>
+      <context_switch_overhead>0</context_switch_overhead>
+      <cfg_relocatable>false</cfg_relocatable>
+      <mils_confidentiality_level>UnClassified</mils_confidentiality_level>
+      <mils_integrity_level>Low</mils_integrity_level>
+      <mils_component>SLS</mils_component>
+      <mils_task>Application</mils_task>
+      <mils_compliant>false</mils_compliant>
+      <access_memory_number>0</access_memory_number>
+      <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
+      <period>30</period>
+      <jitter>0</jitter>
+      <every>0</every>
+    </periodic_task>
+    <periodic_task id="26">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_3.controller.the_video_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_3.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_3.controller</address_space_name>
       <capacity>3</capacity>
@@ -578,16 +585,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="28">
+    </periodic_task>
+    <periodic_task id="27">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_3.controller.the_door_sensor_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_3.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_3.controller</address_space_name>
       <capacity>3</capacity>
@@ -610,16 +615,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="29">
+    </periodic_task>
+    <periodic_task id="28">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_3.controller.the_window_sensor_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_3.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_3.controller</address_space_name>
       <capacity>3</capacity>
@@ -642,16 +645,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="30">
+    </periodic_task>
+    <periodic_task id="29">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_3.controller.the_pin_device_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_3.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_3.controller</address_space_name>
       <capacity>3</capacity>
@@ -674,16 +675,14 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
-    <sporadic_task id="31">
+    </periodic_task>
+    <periodic_task id="30">
       <object_type>Task_Object_Type</object_type>
       <name>monitored_object_target_obj_Instance.room_3.controller.the_movement_sensor_thread</name>
-      <task_type>Sporadic_Type</task_type>
+      <task_type>Periodic_Type</task_type>
       <cpu_name>monitored_object_target_obj_Instance.room_3.cpu</cpu_name>
       <address_space_name>monitored_object_target_obj_Instance.room_3.controller</address_space_name>
       <capacity>3</capacity>
@@ -706,11 +705,39 @@
       <mils_compliant>false</mils_compliant>
       <access_memory_number>0</access_memory_number>
       <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
-      <period>1000</period>
+      <period>30</period>
       <jitter>0</jitter>
       <every>0</every>
-      <seed>0</seed>
-      <predictable>false</predictable>
-    </sporadic_task>
+    </periodic_task>
+    <periodic_task id="31">
+      <object_type>Task_Object_Type</object_type>
+      <name>monitored_object_target_obj_Instance.room_3.controller.the_access_control_thread</name>
+      <task_type>Periodic_Type</task_type>
+      <cpu_name>monitored_object_target_obj_Instance.room_3.cpu</cpu_name>
+      <address_space_name>monitored_object_target_obj_Instance.room_3.controller</address_space_name>
+      <capacity>3</capacity>
+      <deadline>1000</deadline>
+      <start_time>0</start_time>
+      <priority>10</priority>
+      <blocking_time>0</blocking_time>
+      <policy>Sched_Fifo</policy>
+      <offsets/>
+      <text_memory_size>0</text_memory_size>
+      <text_memory_start_address>0</text_memory_start_address>
+      <stack_memory_size>0</stack_memory_size>
+      <criticality>0</criticality>
+      <context_switch_overhead>0</context_switch_overhead>
+      <cfg_relocatable>false</cfg_relocatable>
+      <mils_confidentiality_level>UnClassified</mils_confidentiality_level>
+      <mils_integrity_level>Low</mils_integrity_level>
+      <mils_component>SLS</mils_component>
+      <mils_task>Application</mils_task>
+      <mils_compliant>false</mils_compliant>
+      <access_memory_number>0</access_memory_number>
+      <maximum_number_of_memory_request_per_job>0</maximum_number_of_memory_request_per_job>
+      <period>30</period>
+      <jitter>0</jitter>
+      <every>0</every>
+    </periodic_task>
   </tasks>
 </cheddar>

@@ -32,12 +32,19 @@ public
 		properties
 			Data_Model::Data_Representation => integer;
 	end Timestamp;
+	
+	data Access_Type
+		properties
+			Data_Model::Data_Representation => enum;
+			Data_Model::Enumerators => ("authorized", "unauthorized", "no_person_in_room");
+	end Access_Type;
 	----------------------
 	
 	-----Subprograms
 	subprogram Video_Processing_Spg
 		features
 			video_stream: in parameter Video_stream;
+			person_on_video_detected: out parameter BooleanValue;
 		properties
 			source_language => (C);
 			source_name => "room_controller_video_thread";
@@ -47,40 +54,41 @@ public
 	subprogram Window_Sensor_Spg
 		features
 			window_state: in parameter Window_State;
+			window_opened: out parameter BooleanValue;
 		properties
 			source_language => (C);
-			source_name => "room_controller_video_thread";
+			source_name => "room_controller_window_control_thread";
 			source_text => ("room.c");
 	end Window_Sensor_Spg;
 	
 	subprogram Door_Sensor_Spg
 		features
 			door_state: in parameter Door_State;
-			last_correct_pin_time: in parameter Timestamp;
+			door_opened: out parameter BooleanValue;
 		properties
 			source_language => (C);
-			source_name => "room_controller_video_thread";
+			source_name => "room_controller_door_control_thread";
 			source_text => ("room.c");
 	end Door_Sensor_Spg;
 	
 	subprogram Movement_Sensor_Spg
 		features
 			movement_data: in parameter BooleanValue;
+			person_in_room: out parameter BooleanValue;
 		properties
 			source_language => (C);
-			source_name => "room_controller_video_thread";
+			source_name => "room_controller_movement_control_thread";
 			source_text => ("room.c");
 	end Movement_Sensor_Spg;
 	
 	subprogram Pin_Device_Spg
 		features
 			entered_pin: in parameter Pin;
-			correct_pin_timestamp: out parameter Timestamp;
-			tries_exceeded: out parameter BooleanValue;
+			is_pin_correct: out parameter BooleanValue;
 			
 		properties
 			source_language => (C);
-			source_name => "room_controller_video_thread";
+			source_name => "room_controller_pin_control_thread";
 			source_text => ("room.c");
 	end Pin_Device_Spg;
 
@@ -88,10 +96,24 @@ public
 	subprogram Alarm_Spg
 		properties
 			source_language => (C);
-			source_name => "room_controller_video_thread";
+			source_name => "room_controller_alarm_control_thread";
 			source_text => ("room.c");
 	end Alarm_Spg;
 
+	subprogram Access_Control_Spg
+		-- dostaje informacje o stanie w pokoju
+		-- przechowuje wewnętrzny stan
+		-- na podstawie tych danych zwraca informację o tym, czy dostęp jest zautoryzowany czy nie.
+		features
+			is_pin_correct: in parameter BooleanValue;
+			person_on_video_detected: in parameter BooleanValue;
+			person_entered: in parameter BooleanValue;
+			access_type: out parameter Access_Type;
+		properties
+			source_language => (C);
+			source_name => "romm_controller_access_control_thread";
+			source_text => ("room.c");
+	end Access_Control_Spg;
 	-------------------
 
 
@@ -99,8 +121,8 @@ public
   	thread video_thread
 		features
 			video_stream: in data port Video_Stream;
+			person_on_video_detected: out data port BooleanValue;
 	end video_thread;
-
 	thread implementation video_thread.i
 		calls
 			Mycalls: {
@@ -108,10 +130,11 @@ public
 			};
 		connections
 			c0: parameter video_stream -> Q_Spg.video_stream;
+			c1: parameter Q_spg.person_on_video_detected -> person_on_video_detected; 
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Compute_Execution_Time => 3 ms .. 3 ms; 
-			Period => 1000ms;
+			Period => 30ms;
 			Deadline => 1000ms;
 			Priority => 4;
 			
@@ -122,7 +145,7 @@ public
 	thread window_sensor_thread
 		features
 			window_state: in data port Window_State;
-			window_opened: out event port;
+			window_opened: out data port BooleanValue;
 	end window_sensor_thread;
 	
 	thread implementation window_sensor_thread.i
@@ -132,10 +155,11 @@ public
 			};
 		connections
 			c0: parameter window_state -> Q_Spg.window_state;
+			c1: parameter Q_Spg.window_opened -> window_opened;
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Compute_Execution_Time => 3 ms .. 3 ms; 
-			Period => 1000ms;
+			Period => 30ms;
 			Deadline => 1000ms;
 			Priority => 8;
 			  
@@ -144,8 +168,7 @@ public
 	thread door_sensor_thread
 		features
 			door_state: in data port Door_State;
-			intruder_entered: out event port;
-			employee_entered: out event port;
+			person_entered: out data port BooleanValue;
 	end door_sensor_thread;
 	thread implementation door_sensor_thread.i
 		calls
@@ -154,10 +177,11 @@ public
 			};
 		connections
 			c0: parameter door_state -> Q_Spg.door_state;
+			c1: parameter Q_Spg.door_opened -> person_entered;
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Compute_Execution_Time => 3 ms .. 3 ms; 
-			Period => 1000ms;
+			Period => 30ms;
 			Deadline => 1000ms;
 			Priority => 7;
 			  
@@ -167,7 +191,7 @@ public
 	thread pin_device_thread
 		features
 			entered_pin: in data port Pin;
-			too_many_incorrect_tries: out event port;
+			is_pin_correct: out data port BooleanValue;
 	end pin_device_thread;
 	thread implementation pin_device_thread.i
 		calls
@@ -176,10 +200,11 @@ public
 			};
 		connections
 			c0: parameter entered_pin -> Q_Spg.entered_pin;
+			c1: parameter Q_Spg.is_pin_correct -> is_pin_correct;
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Compute_Execution_Time => 3 ms .. 3 ms; 
-			Period => 1000ms;
+			Period => 30ms;
 			Deadline => 1000ms;
 			Priority => 6;
 			  
@@ -189,7 +214,7 @@ public
 	thread movement_sensor_thread
 		features
 			movement_data: in data port BooleanValue;
-			unauthorized_movement_detected: out event port;
+			person_in_room: out data port BooleanValue;
 	end movement_sensor_thread;
 	thread implementation movement_sensor_thread.i
 		calls
@@ -198,14 +223,45 @@ public
 			};
 		connections
 			c0: parameter movement_data -> Q_Spg.movement_data;
+			c1: parameter Q_Spg.person_in_room -> person_in_room; 
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Compute_Execution_Time => 3 ms .. 3 ms; 
-			Period => 1000ms;
+			Period => 30ms;
 			Deadline => 1000ms;  
 			Priority => 5;
 			
 	end movement_sensor_thread.i;
+	
+	
+	thread access_control_thread
+		features
+			is_pin_correct: in data port BooleanValue;
+			person_on_video_detected: in data port BooleanValue;
+			person_entered: in data port BooleanValue;
+			access_type: out data port Access_Type;
+	end access_control_thread;
+	
+	thread implementation access_control_thread.impl
+		subcomponents
+			local_access_type: data Access_Type;
+		calls
+			MyCalls: {
+				Q_Spg: subprogram Access_Control_Spg;
+			};
+		connections
+			c1: parameter is_pin_correct -> Q_Spg.is_pin_correct;
+			c2: parameter person_on_video_detected -> Q_spg.person_on_video_detected;
+			c3: parameter person_entered -> Q_spg.person_entered;
+			c4: parameter Q_spg.access_type -> local_access_type;
+			c5: port local_access_type -> access_type;
+		properties
+			Dispatch_Protocol => Periodic;
+			Compute_Execution_Time => 3 ms .. 3 ms; 
+			Period => 30ms;
+			Deadline => 1000ms;
+			Priority => 10; 
+	end access_control_thread.impl;
 		
 		
 	-------------------------
