@@ -61,6 +61,8 @@ with deployment;
 	  END mem_bus;
 	 
 	  BUS implementation mem_bus.impl
+	  	properties
+	  		Deployment::Transport_API => BSD_Sockets;
 	  end mem_bus.impl;
 	  
 	  MEMORY RAM
@@ -201,12 +203,16 @@ with deployment;
 	
 	process monitored_object_controller
 		features
-			person_in: in data port threads::Access_Type;
+			access_type: in data port threads::Access_Type;
 			turn_on_alarm: out event port;
 	end monitored_object_controller;
 	
 	process implementation monitored_object_controller.impl
-		
+		subcomponents
+			the_alarm_control_thread: thread threads::alarm_control_thread.impl;
+		connections
+			c1: port access_type -> the_alarm_control_thread.access_type;
+			c2: port the_alarm_control_thread.turn_on_alarm -> turn_on_alarm;
 	end monitored_object_controller.impl;
 	
 	
@@ -222,19 +228,22 @@ with deployment;
 			alarm: device alarm.impl;
 			
 		    cpu : PROCESSOR cpu.impl;
---			mem_bus: BUS mem_bus.impl;
---			RAM: MEMORY RAM.impl;
+			mem_bus: BUS mem_bus.impl;
 		connections
-			C1: port room_1.person_in -> controller.person_in;
-			C2: port room_2.person_in -> controller.person_in;
-			C3: port room_3.person_in -> controller.person_in;
+			C1: port room_1.person_in -> controller.access_type;
+			C2: port room_2.person_in -> controller.access_type;
+			C3: port room_3.person_in -> controller.access_type;
 			C4: port controller.turn_on_alarm -> alarm.turn_on_alarm;
 			
---			A7: bus access mem_bus -> alarm.mem_bus;
---			A8: BUS ACCESS mem_bus -> cpu.mem_bus;
---			A9: BUS ACCESS mem_bus -> RAM.mem_bus;
+			A7: bus access mem_bus -> alarm.mem_bus;
+			A8: bus access mem_bus -> cpu.mem_bus;
+		
 	  properties
     	Actual_Processor_Binding => (reference (cpu)) applies to controller;
+    	Actual_Connection_Binding => (reference(mem_bus)) applies to C1;
+		Actual_Connection_Binding => (reference(mem_bus)) applies to C4;
+		Actual_Connection_Binding => (reference(mem_bus)) applies to C3;
+		Actual_Connection_Binding => (reference(mem_bus)) applies to C2;
 --		Actual_Memory_Binding => (reference (ram)) applies to controller;
     	
 	end monitored_object.target_obj;

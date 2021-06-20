@@ -94,7 +94,7 @@
       <element uuid="36285d74-bce0-4a49-bcc6-71d900e53113" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
-          <seg>person_in</seg>
+          <seg>access_type</seg>
         </bo>
         <position y="10.0"/>
       </element>
