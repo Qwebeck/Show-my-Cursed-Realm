@@ -1,0 +1,212 @@
+package threads
+public
+	with Data_Model;
+
+	-----Data
+	data Video_Stream
+		properties
+			Data_Model::Data_Representation => integer;
+	end Video_Stream;
+	
+	data Window_State
+		properties
+			Data_Model::Data_Representation => integer;
+	end Window_State;
+	
+	data Door_State
+		properties
+			Data_Model::Data_Representation => integer;
+	end Door_State;
+	
+	data Pin
+		properties
+			Data_Model::Data_Representation => integer;
+	end Pin;
+	
+	data BooleanValue
+		properties
+			Data_Model::Data_Representation => integer;
+	end BooleanValue;
+	
+	data Timestamp
+		properties
+			Data_Model::Data_Representation => integer;
+	end Timestamp;
+	----------------------
+	
+	-----Subprograms
+	subprogram Video_Processing_Spg
+		features
+			video_stream: in parameter Video_stream;
+		properties
+			source_language => (C);
+			source_name => "room_controller_video_thread";
+			source_text => ("room.c");
+	end Video_Processing_Spg;
+	
+	subprogram Window_Sensor_Spg
+		features
+			window_state: in parameter Window_State;
+		properties
+			source_language => (C);
+			source_name => "room_controller_video_thread";
+			source_text => ("room.c");
+	end Window_Sensor_Spg;
+	
+	subprogram Door_Sensor_Spg
+		features
+			door_state: in parameter Door_State;
+			last_correct_pin_time: in parameter Timestamp;
+		properties
+			source_language => (C);
+			source_name => "room_controller_video_thread";
+			source_text => ("room.c");
+	end Door_Sensor_Spg;
+	
+	subprogram Movement_Sensor_Spg
+		features
+			movement_data: in parameter BooleanValue;
+		properties
+			source_language => (C);
+			source_name => "room_controller_video_thread";
+			source_text => ("room.c");
+	end Movement_Sensor_Spg;
+	
+	subprogram Pin_Device_Spg
+		features
+			entered_pin: in parameter Pin;
+			correct_pin_timestamp: out parameter Timestamp;
+			tries_exceeded: out parameter BooleanValue;
+			
+		properties
+			source_language => (C);
+			source_name => "room_controller_video_thread";
+			source_text => ("room.c");
+	end Pin_Device_Spg;
+
+	
+	subprogram Alarm_Spg
+		properties
+			source_language => (C);
+			source_name => "room_controller_video_thread";
+			source_text => ("room.c");
+	end Alarm_Spg;
+
+	-------------------
+
+
+	-----Threads
+  	thread video_thread
+		features
+			video_stream: in data port Video_Stream;
+	end video_thread;
+
+	thread implementation video_thread.i
+		calls
+			Mycalls: {
+				Q_Spg: subprogram Video_Processing_Spg;
+			};
+		connections
+			c0: parameter video_stream -> Q_Spg.video_stream;
+		properties
+			Dispatch_Protocol => Sporadic;
+			Compute_Execution_Time => 3 ms .. 3 ms; 
+			Period => 1000ms;
+			Deadline => 1000ms;
+			Priority => 4;
+			
+	end video_thread.i;
+	
+	
+	
+	thread window_sensor_thread
+		features
+			window_state: in data port Window_State;
+			window_opened: out event port;
+	end window_sensor_thread;
+	
+	thread implementation window_sensor_thread.i
+		calls
+			Mycalls: {
+				Q_Spg: subprogram Window_Sensor_Spg;
+			};
+		connections
+			c0: parameter window_state -> Q_Spg.window_state;
+		properties
+			Dispatch_Protocol => Sporadic;
+			Compute_Execution_Time => 3 ms .. 3 ms; 
+			Period => 1000ms;
+			Deadline => 1000ms;
+			Priority => 8;
+			  
+	end window_sensor_thread.i;
+	
+	thread door_sensor_thread
+		features
+			door_state: in data port Door_State;
+			intruder_entered: out event port;
+			employee_entered: out event port;
+	end door_sensor_thread;
+	thread implementation door_sensor_thread.i
+		calls
+			Mycalls: {
+				Q_Spg: subprogram Door_Sensor_Spg;
+			};
+		connections
+			c0: parameter door_state -> Q_Spg.door_state;
+		properties
+			Dispatch_Protocol => Sporadic;
+			Compute_Execution_Time => 3 ms .. 3 ms; 
+			Period => 1000ms;
+			Deadline => 1000ms;
+			Priority => 7;
+			  
+	end door_sensor_thread.i;
+	
+	
+	thread pin_device_thread
+		features
+			entered_pin: in data port Pin;
+			too_many_incorrect_tries: out event port;
+	end pin_device_thread;
+	thread implementation pin_device_thread.i
+		calls
+			Mycalls: {
+				Q_Spg: subprogram Pin_Device_Spg;
+			};
+		connections
+			c0: parameter entered_pin -> Q_Spg.entered_pin;
+		properties
+			Dispatch_Protocol => Sporadic;
+			Compute_Execution_Time => 3 ms .. 3 ms; 
+			Period => 1000ms;
+			Deadline => 1000ms;
+			Priority => 6;
+			  
+	end pin_device_thread.i;
+	
+		
+	thread movement_sensor_thread
+		features
+			movement_data: in data port BooleanValue;
+			unauthorized_movement_detected: out event port;
+	end movement_sensor_thread;
+	thread implementation movement_sensor_thread.i
+		calls
+			Mycalls: {
+				Q_Spg: subprogram Movement_Sensor_Spg;
+			};
+		connections
+			c0: parameter movement_data -> Q_Spg.movement_data;
+		properties
+			Dispatch_Protocol => Sporadic;
+			Compute_Execution_Time => 3 ms .. 3 ms; 
+			Period => 1000ms;
+			Deadline => 1000ms;  
+			Priority => 5;
+			
+	end movement_sensor_thread.i;
+		
+		
+	-------------------------
+end threads;
