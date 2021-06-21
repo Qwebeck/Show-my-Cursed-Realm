@@ -148,7 +148,7 @@ with deployment;
 			movement_sensor: device movement_sensor.impl;
 			window_sensor: device window_sensor.impl;
 			door_sensor: device door_sensor.impl;
-			controller: process room_controller.impl;
+			standard_room_controller: process room_controller.impl;
 			pin_device: device pin_lock.impl;
 			
 		    cpu : PROCESSOR cpu.impl;
@@ -156,13 +156,13 @@ with deployment;
 	
 		connections
 			-- tutaj pokazujemy to w jaki sposób nasze urządzenia są połączone ze sobą i jak między nimi przepływają dane
-			C1: port camera.video_stream -> controller.video_stream;
-			C6: port controller.camera_on -> camera.camera_on_off; 
-			C7: port pin_device.entered_pin -> controller.entered_pin;
-			C2: port movement_sensor.movement_data -> controller.movement_data;
-			C3: port window_sensor.state -> controller.window_state;
-			C4: port door_sensor.state -> controller.door_state;
-			C5: port controller.person_in -> person_in; -- przekierowujemy output z controllera na zewnętrzny port naszego systemu
+			C1: port camera.video_stream -> standard_room_controller.video_stream;
+			C6: port standard_room_controller.camera_on -> camera.camera_on_off; 
+			C7: port pin_device.entered_pin -> standard_room_controller.entered_pin;
+			C2: port movement_sensor.movement_data -> standard_room_controller.movement_data;
+			C3: port window_sensor.state -> standard_room_controller.window_state;
+			C4: port door_sensor.state -> standard_room_controller.door_state;
+			C5: port standard_room_controller.person_in -> person_in; -- przekierowujemy output z controllera na zewnętrzny port naszego systemu
 			
 			A3: bus access mem_bus <-> door_sensor.mem_bus;
 			A4: bus access mem_bus <-> window_sensor.mem_bus;
@@ -173,8 +173,8 @@ with deployment;
 
 		properties
 		
-		Actual_Processor_Binding => (reference (cpu)) applies to controller;
-		Actual_Memory_Binding => (reference (cpu.ram)) applies to controller;
+		Actual_Processor_Binding => (reference (cpu)) applies to standard_room_controller;
+		Actual_Memory_Binding => (reference (cpu.ram)) applies to standard_room_controller;
 		Actual_Connection_Binding => (reference(mem_bus)) applies to C1;
 		Actual_Connection_Binding => (reference(mem_bus)) applies to C4;
 		Actual_Connection_Binding => (reference(mem_bus)) applies to C3;
@@ -222,28 +222,28 @@ with deployment;
 		-- system działa w taki sposób, że przekazuje dane do sterownika w przypadku jeśli do któregoś z pokoi wejdzie osoba.
 		subcomponents
 			room_1: system room.standard_room;
-			room_2: system room.standard_room;
-			room_3: system room.standard_room;
-			controller: process monitored_object_controller.impl;
+--			room_2: system room.standard_room;
+--			room_3: system room.standard_room;
+			global_controller: process monitored_object_controller.impl;
 			alarm: device alarm.impl;
 			
 		    cpu : PROCESSOR cpu.impl;
 			mem_bus: BUS mem_bus.impl;
 		connections
-			C1: port room_1.person_in -> controller.access_type;
-			C2: port room_2.person_in -> controller.access_type;
-			C3: port room_3.person_in -> controller.access_type;
-			C4: port controller.turn_on_alarm -> alarm.turn_on_alarm;
+			C1: port room_1.person_in -> global_controller.access_type;
+--			C2: port room_2.person_in -> global_controller.access_type;
+--			C3: port room_3.person_in -> global_controller.access_type;
+			C4: port global_controller.turn_on_alarm -> alarm.turn_on_alarm;
 			
 			A7: bus access mem_bus -> alarm.mem_bus;
 			A8: bus access mem_bus -> cpu.mem_bus;
 		
 	  properties
-    	Actual_Processor_Binding => (reference (cpu)) applies to controller;
+    	Actual_Processor_Binding => (reference (cpu)) applies to global_controller;
     	Actual_Connection_Binding => (reference(mem_bus)) applies to C1;
 		Actual_Connection_Binding => (reference(mem_bus)) applies to C4;
-		Actual_Connection_Binding => (reference(mem_bus)) applies to C3;
-		Actual_Connection_Binding => (reference(mem_bus)) applies to C2;
+--		Actual_Connection_Binding => (reference(mem_bus)) applies to C3;
+--		Actual_Connection_Binding => (reference(mem_bus)) applies to C2;
 --		Actual_Memory_Binding => (reference (ram)) applies to controller;
     	
 	end monitored_object.target_obj;

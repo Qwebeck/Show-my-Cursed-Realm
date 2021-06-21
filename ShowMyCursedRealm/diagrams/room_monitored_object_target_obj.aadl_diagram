@@ -113,7 +113,7 @@
       </element>
       <bo>
         <seg>subcomponent</seg>
-        <seg>controller</seg>
+        <seg>global_controller</seg>
       </bo>
       <position x="2336.0" y="139.0"/>
       <size width="477.0" height="60.0"/>
@@ -971,7 +971,7 @@
         </element>
         <bo>
           <seg>subcomponent</seg>
-          <seg>controller</seg>
+          <seg>standard_room_controller</seg>
         </bo>
         <position x="651.0" y="91.0"/>
         <size width="1537.0" height="1216.0"/>
