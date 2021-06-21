@@ -222,8 +222,7 @@ with deployment;
 		-- system działa w taki sposób, że przekazuje dane do sterownika w przypadku jeśli do któregoś z pokoi wejdzie osoba.
 		subcomponents
 			room_1: system room.standard_room;
---			room_2: system room.standard_room;
---			room_3: system room.standard_room;
+
 			global_controller: process monitored_object_controller.impl;
 			alarm: device alarm.impl;
 			
@@ -231,8 +230,7 @@ with deployment;
 			mem_bus: BUS mem_bus.impl;
 		connections
 			C1: port room_1.person_in -> global_controller.access_type;
---			C2: port room_2.person_in -> global_controller.access_type;
---			C3: port room_3.person_in -> global_controller.access_type;
+
 			C4: port global_controller.turn_on_alarm -> alarm.turn_on_alarm;
 			
 			A7: bus access mem_bus -> alarm.mem_bus;
@@ -242,9 +240,7 @@ with deployment;
     	Actual_Processor_Binding => (reference (cpu)) applies to global_controller;
     	Actual_Connection_Binding => (reference(mem_bus)) applies to C1;
 		Actual_Connection_Binding => (reference(mem_bus)) applies to C4;
---		Actual_Connection_Binding => (reference(mem_bus)) applies to C3;
---		Actual_Connection_Binding => (reference(mem_bus)) applies to C2;
---		Actual_Memory_Binding => (reference (ram)) applies to controller;
+
     	
 	end monitored_object.target_obj;
 	
