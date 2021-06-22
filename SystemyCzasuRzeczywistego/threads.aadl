@@ -47,9 +47,9 @@ public
 			video_stream: in parameter Video_stream;
 			person_on_video_detected: out parameter BooleanValue;
 		properties
-			source_language => (Ada95);
-			source_name => "RoomController.VideoThread";
---			source_text => ("room.c");
+			source_language => (C);
+			source_name => "roomController_VideoThread";
+			source_text => ("room.c");
 	end Video_Processing_Spg;
 	
 	subprogram Window_Sensor_Spg
@@ -57,9 +57,9 @@ public
 			window_state: in parameter Window_State;
 			window_opened: out parameter BooleanValue;
 		properties
-			source_language => (Ada95);
-			source_name => "RoomController.WindowControlThread";
---			source_text => ("room.c");
+			source_language => (C);
+			source_name => "roomController_WindowControlThread";
+			source_text => ("room.c");
 	end Window_Sensor_Spg;
 	
 	subprogram Door_Sensor_Spg
@@ -67,9 +67,9 @@ public
 			door_state: in parameter Door_State;
 			door_opened: out parameter BooleanValue;
 		properties
-			source_language => (Ada95);
-			source_name => "RoomController.DoorControlThread";
---			source_text => ("room.c");
+			source_language => (C);
+			source_name => "roomController_DoorControlThread";
+			source_text => ("room.c");
 	end Door_Sensor_Spg;
 	
 	subprogram Movement_Sensor_Spg
@@ -77,9 +77,9 @@ public
 			movement_data: in parameter BooleanValue;
 			person_in_room: out parameter BooleanValue;
 		properties
-			source_language => (Ada95);
-			source_name => "RoomController.MovementControlThread";
---			source_text => ("room.c");
+			source_language => (C);
+			source_name => "roomController_MovementControlThread";
+			source_text => ("room.c");
 	end Movement_Sensor_Spg;
 	
 	subprogram Pin_Device_Spg
@@ -88,18 +88,10 @@ public
 			is_pin_correct: out parameter BooleanValue;
 			
 		properties
-			source_language => (Ada95);
-			source_name => "RoomController.PinControlThread";
---			source_text => ("room.c");
+			source_language => (C);
+			source_name => "roomController_PinControlThread";
+			source_text => ("room.c");
 	end Pin_Device_Spg;
-
-	
-	subprogram Alarm_Spg
-		properties
-			source_language => (Ada95);
-			source_name => "RoomController.AlarmControlThread";
---			source_text => ("room.c");
-	end Alarm_Spg;
 
 	subprogram Access_Control_Spg
 		-- dostaje informacje o stanie w pokoju
@@ -111,9 +103,9 @@ public
 			person_entered: in parameter BooleanValue;
 			access_type: out parameter Access_Type;
 		properties
-			source_language => (Ada95);
-			source_name => "RoomController.AccessControlThread";
---			source_text => ("room.c");
+			source_language => (C);
+			source_name => "roomController_AccessControlThread";
+			source_text => ("room.c");
 	end Access_Control_Spg;
 	
 	
@@ -125,8 +117,8 @@ public
 			turn_on_alarm: out parameter BooleanValue;
 		properties
 			source_language => (C);
-			source_name => "RoomController.AlarmControlThread";
---			source_text => ("room.c");
+			source_name => "roomController_AlarmControlThread";
+			source_text => ("room.c");
 	end Alarm_Control_Spg;
 	-------------------
 
