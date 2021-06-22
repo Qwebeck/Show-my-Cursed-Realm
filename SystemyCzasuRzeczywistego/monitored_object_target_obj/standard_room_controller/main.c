@@ -18,7 +18,6 @@
  */
 __PO_HI_MAIN_TYPE __PO_HI_MAIN_NAME (void)
 {
-  extern void adainit (void);
   
 /*!
  * \var period
@@ -37,7 +36,6 @@ __PO_HI_MAIN_TYPE __PO_HI_MAIN_NAME (void)
  */
   __po_hi_initialize ();
   __po_hi_driver_sockets_init (0);
-  adainit ();
   
 /*!
  * Store the period time for task the_video_thread

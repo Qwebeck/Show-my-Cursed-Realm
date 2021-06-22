@@ -56,7 +56,7 @@ typedef enum
 {
   invalid_bus_id = -1,
   bus_mem_bus = 0,
-  bus_mem_bus = 1
+  bus_mem_bus1 = 1
 } __po_hi_bus_id;
 
 #define __PO_HI_NB_TASKS 1

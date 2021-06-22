@@ -10,18 +10,19 @@
 #  Execution platform           : native
 #  Transport API                : TRANSPORT_NONE
 
-USER_OBJS = 
+USER_OBJS =  room.o
 
 MAINAPP = monitored_object_target_obj
 BINARY = standard_room_controller
 TARGET = native
 NEED_TRANSPORT = yes
 RUNTIME_PATH=$(shell echo "/opt/ocarina-2017.1-suite-linux-x86_64-20170204/include/ocarina/runtime/polyorb-hi-c" | sed 's/ /\\ /g')
-USER_SOURCES_DIRS=.
+USER_SOURCES_DIRS= "-I/home/gjn/Dev/Show-my-Cursed-Realm/SystemyCzasuRzeczywistego"
 ASN_SOURCES=
 include $(RUNTIME_PATH)/make/Makefile.common
 
 compile-c-files:
+	$(CC) -c $(INCLUDE) $(CFLAGS) -I'/home/gjn/Dev/Show-my-Cursed-Realm/SystemyCzasuRzeczywistego/' '/home/gjn/Dev/Show-my-Cursed-Realm/SystemyCzasuRzeczywistego/room.c' -o room.o
 
 compile-cpp-files:
 

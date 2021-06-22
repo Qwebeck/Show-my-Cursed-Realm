@@ -227,19 +227,19 @@ with deployment;
 			alarm: device alarm.impl;
 			
 		    cpu : PROCESSOR cpu.impl;
-			mem_bus: BUS mem_bus.impl;
+			mem_bus1: BUS mem_bus.impl;
 		connections
 			C1: port room_1.person_in -> global_controller.access_type;
 
 			C4: port global_controller.turn_on_alarm -> alarm.turn_on_alarm;
 			
-			A7: bus access mem_bus -> alarm.mem_bus;
-			A8: bus access mem_bus -> cpu.mem_bus;
+			A7: bus access mem_bus1 -> alarm.mem_bus;
+			A8: bus access mem_bus1 -> cpu.mem_bus;
 		
 	  properties
     	Actual_Processor_Binding => (reference (cpu)) applies to global_controller;
-    	Actual_Connection_Binding => (reference(mem_bus)) applies to C1;
-		Actual_Connection_Binding => (reference(mem_bus)) applies to C4;
+    	Actual_Connection_Binding => (reference(mem_bus1)) applies to C1;
+		Actual_Connection_Binding => (reference(mem_bus1)) applies to C4;
 
     	
 	end monitored_object.target_obj;

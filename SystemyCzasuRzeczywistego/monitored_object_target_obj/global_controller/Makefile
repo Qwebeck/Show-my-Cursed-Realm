@@ -10,7 +10,7 @@
 #  Execution platform           : native
 #  Transport API                : TRANSPORT_NONE
 
-USER_OBJS = 
+USER_OBJS =  room.o
 
 MAINAPP = monitored_object_target_obj
 BINARY = global_controller
@@ -22,6 +22,7 @@ ASN_SOURCES=
 include $(RUNTIME_PATH)/make/Makefile.common
 
 compile-c-files:
+	$(CC) -c $(INCLUDE) $(CFLAGS) -I'/home/gjn/Dev/Show-my-Cursed-Realm/SystemyCzasuRzeczywistego/' '/home/gjn/Dev/Show-my-Cursed-Realm/SystemyCzasuRzeczywistego/room.c' -o room.o
 
 compile-cpp-files:
 
