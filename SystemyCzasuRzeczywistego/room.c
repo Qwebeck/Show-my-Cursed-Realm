@@ -152,7 +152,7 @@ int turnOnAlarm(enum Access_Type access_type)
 		
 		case unauthorized:
 		printf("Wprowadzono niepoprawny pin\n");
-		return 0;	
+		return 1;	
 	}
 }
 
